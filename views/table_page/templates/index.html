@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>User Management</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="table_page/css/style.css">
 </head>
 <body>
   <div class="container">
@@ -29,7 +29,7 @@
     <div class="modal-content">
       <span class="close" onclick="hideAddUserForm()">&times;</span>
       <h2>Add User</h2>
-      <form id="addUserForm">
+      <form action="/table" method="post" id="addUserForm">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
         <label for="phoneNumber">Phone Number:</label>
@@ -39,6 +39,6 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="table_page/js/script.js"></script>
 </body>
 </html>
