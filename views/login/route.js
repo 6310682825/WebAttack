@@ -3,7 +3,7 @@ const path = require('path')
 const bodyParser = require('body-parser');
 const router = express.Router()
 router.get('/', (req, res) => {
-    res.send("Home page")
+    res.redirect('/table')
 })
 router.get('/login', (req, res) => {
     if (req.session.login) {

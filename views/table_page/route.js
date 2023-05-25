@@ -10,10 +10,18 @@ router.get('/table', (req, res) => {
         res.redirect('/login')
     }
 })
-router.post('/table', (req, res) => {
+router.post('/addUser', (req, res) => {
     const name = req.body.name
-    const text = req.body.text
-    const phone = req.body.phone
-    console.log(name, text, phone)
+    const phone = req.body.phoneNumber
+    console.log(name, phone)
+})
+router.post('/editUser', (req,res)=> {
+    const name = req.body.name
+    const phone = req.body.phoneNumber
+    console.log(name, phone)
+})
+router.post('/deleteUser', (req, res)=> {
+    const name = req.body.name
+    console.log(name)
 })
 module.exports = router

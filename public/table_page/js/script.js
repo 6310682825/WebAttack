@@ -36,7 +36,16 @@ function addUser(event) {
   const phoneNumber = phoneNumberInput.value;
 
   users.push({ name, phoneNumber });
-
+  fetch("/addUser", {
+    method: "POST",
+    body: JSON.stringify({
+      name: name,
+      phoneNumber: phoneNumber,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+  });
   form.reset();
   hideAddUserForm();
   displayUsers();
@@ -58,13 +67,21 @@ function hideAddUserForm() {
 function searchUsers() {
   const searchInput = document.querySelector('#searchInput');
   const searchTerm = searchInput.value.toLowerCase();
+  var tr = document.getElementsByTagName('tr')
+  // console.log(tr[1].getElementsByTagName('td')[0].innerHTML.toLowerCase())
+  for (i = 1; i < tr.length; i++) {
+    const check_name = tr[i].getElementsByTagName('td')[0].innerHTML.toLowerCase().includes(searchTerm)
+    const check_phone = tr[i].getElementsByTagName('td')[1].innerHTML.includes(searchTerm)
+    if (check_name || check_phone)
+      tr[i].style.display = ""
+    else tr[i].style.display = "none"
+  }
+  // const filteredUsers = users.filter(user =>
+  //   user.name.toLowerCase().includes(searchTerm) ||
+  //   user.phoneNumber.includes(searchTerm)
+  // );
 
-  const filteredUsers = users.filter(user =>
-    user.name.toLowerCase().includes(searchTerm) ||
-    user.phoneNumber.includes(searchTerm)
-  );
-
-  displayUsers(filteredUsers);
+  // displayUsers(filteredUsers);
 }
 
 // Function to edit a user
@@ -78,6 +95,16 @@ function editUser(name) {
     if (newName && newPhoneNumber) {
       user.name = newName;
       user.phoneNumber = newPhoneNumber;
+      fetch("/editUser", {
+        method: "POST",
+        body: JSON.stringify({
+          name: newName,
+          phoneNumber: newPhoneNumber,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      });
       displayUsers();
     }
   }
@@ -89,6 +116,15 @@ function deleteUser(name) {
 
   if (confirmed) {
     users = users.filter(user => user.name !== name);
+    fetch("/deleteUser", {
+      method: "POST",
+      body: JSON.stringify({
+        name: name,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    });
     displayUsers();
   }
 }
