@@ -1,28 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ตารางแสดงข้อมูลผู้ใช้</title>
+  <title>User Management</title>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <h1>ตารางแสดงข้อมูลผู้ใช้</h1>
-  
-  <table id="userTable">
-    <tr>
-      <th>ชื่อ</th>
-      <th>เบอร์โทรศัพท์</th>
-      <th>แก้ไข</th>
-      <th>ลบ</th>
-    </tr>
-  </table>
-  
-  <form id="userForm">
-    <label for="name">ชื่อ:</label>
-    <input type="text" id="name" required>
-    <label for="phone">เบอร์โทรศัพท์:</label>
-    <input type="tel" id="phone" required>
-    <button type="submit" id="submit">เพิ่มข้อมูล</button>
-  </form>
+  <div class="container">
+    <h1>User Management</h1>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search...">
+    </div>
+    <button class="add-user-btn" onclick="showAddUserForm()">Add User</button>
+    <table id="userTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone Number</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- User data will be dynamically inserted here -->
+      </tbody>
+    </table>
+  </div>
+
+  <div id="addUserModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="hideAddUserForm()">&times;</span>
+      <h2>Add User</h2>
+      <form id="addUserForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" required>
+        <button type="submit">Add</button>
+      </form>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
