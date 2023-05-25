@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ตารางแสดงข้อมูลผู้ใช้</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <h1>ตารางแสดงข้อมูลผู้ใช้</h1>
+  
+  <table id="userTable">
+    <tr>
+      <th>ชื่อ</th>
+      <th>เบอร์โทรศัพท์</th>
+      <th>แก้ไข</th>
+      <th>ลบ</th>
+    </tr>
+  </table>
+  
+  <form id="userForm">
+    <label for="name">ชื่อ:</label>
+    <input type="text" id="name" required>
+    <label for="phone">เบอร์โทรศัพท์:</label>
+    <input type="tel" id="phone" required>
+    <button type="submit" id="submit">เพิ่มข้อมูล</button>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+</html>
