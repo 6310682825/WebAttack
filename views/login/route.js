@@ -2,6 +2,9 @@ const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser');
 const router = express.Router()
+const db = require('../../table.js')
+
+let sql
 router.get('/', (req, res) => {
     res.redirect('/table')
 })
@@ -17,6 +20,16 @@ router.post('/login', (req, res) => {
     const username = req.body.username
     const password = req.body.password
     const expire = 30000
+    sql = `SELECT * FROM users WHERE name = ? AND password = ?;`
+    db.all(sql,[username, password],(err,rows)=>{
+        if (err) res.redirect('/login')
+        req.session.username = username
+        req.session.password = password
+        req.session.login = true
+        req.session.cookie.maxAge = expire
+        res.redirect('/')
+    })
+    /*
     if (username === "Chain13" && password === "IncludedHuman") {
         req.session.username = username
         req.session.password = password
@@ -27,6 +40,7 @@ router.post('/login', (req, res) => {
     else {
         res.redirect('/login')
     }
+    */
 
 })
 module.exports = router

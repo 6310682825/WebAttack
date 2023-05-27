@@ -3,6 +3,7 @@
 <head>
   <title>User Management</title>
   <link rel="stylesheet" type="text/css" href="table_page/css/style.css">
+  <script src="table_page/js/script.js"></script>
 </head>
 <body>
   <div class="container">
@@ -21,6 +22,16 @@
       </thead>
       <tbody>
         <!-- User data will be dynamically inserted here -->
+        <% for(var i=0; i < data.length; i++) { %>
+          <tr>
+            <td><%= data[i].name %></td>
+            <td><%= data[i].number %></td>
+            <td>
+              <button class="edit-btn" onclick="editUser('<%= data[i].id %>')">Edit</button>
+              <button class="delete-btn" onclick="deleteUser(<%= data[i].id %>)">Delete</button>
+            </td>
+          </tr>
+        <% } %>
       </tbody>
     </table>
   </div>
@@ -39,6 +50,5 @@
     </div>
   </div>
 
-  <script src="table_page/js/script.js"></script>
 </body>
 </html>
