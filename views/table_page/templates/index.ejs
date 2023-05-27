@@ -16,6 +16,7 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>Owner</th>
           <th>Phone Number</th>
           <th>Actions</th>
         </tr>
@@ -25,6 +26,7 @@
         <% for(var i=0; i < data.length; i++) { %>
           <tr>
             <td><%= data[i].name %></td>
+            <td><%= data[i].owner %></td>
             <td><%= data[i].number %></td>
             <td>
               <button class="edit-btn" onclick="editUser('<%= data[i].id %>')">Edit</button>

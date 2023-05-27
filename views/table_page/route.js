@@ -6,9 +6,10 @@ let sql
 
 router.get('/table', (req, res) => {
     if (req.session.login) {
-        sql = `SELECT name, number FROM phone_book`
+        sql = `SELECT name, owner, number FROM phone_book`
         db.all(sql, [], (err, rows) => {
             if (err) return console.log(err.message)
+            console.log(rows)
             res.render('./table_page/templates/index.ejs', { data: rows})
         })
         //res.sendFile(path.join(__dirname, '/templates/index.html'))
