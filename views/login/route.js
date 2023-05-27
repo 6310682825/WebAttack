@@ -22,7 +22,8 @@ router.post('/login', (req, res) => {
     const expire = 30000
     sql = `SELECT * FROM users WHERE name = ? AND password = ?;`
     db.all(sql,[username, password],(err,rows)=>{
-        if (err) res.redirect('/login')
+        if (err) return res.redirect('/login')
+        if (rows.length == 0) return res.redirect('/login')
         req.session.username = username
         req.session.password = password
         req.session.login = true
