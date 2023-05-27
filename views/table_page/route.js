@@ -20,11 +20,13 @@ router.get('/table', (req, res) => {
 router.post('/addUser', (req, res) => {
     const name = req.body.name
     const phone = req.body.phoneNumber
+    sql = "INSERT INTO phone_book (name, number) VALUES (?,?)"
     console.log(name, phone)
 })
 router.post('/editUser', (req,res)=> {
     const name = req.body.name
     const phone = req.body.phoneNumber
+    sql = "UPDATE phone_book SET number = ? WHERE id = ?"
     console.log(name, phone)
 })
 router.post('/deleteUser', (req, res)=> {
