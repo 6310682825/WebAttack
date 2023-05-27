@@ -1,30 +1,30 @@
 // Sample user data
-let users = [
-  { name: 'John Doe', phoneNumber: '1234567890' },
-  { name: 'Jane Smith', phoneNumber: '9876543210' },
-  { name: 'Tom Wilson', phoneNumber: '4567891230' }
-];
+// let users = [
+//   { name: 'John Doe', phoneNumber: '1234567890' },
+//   { name: 'Jane Smith', phoneNumber: '9876543210' },
+//   { name: 'Tom Wilson', phoneNumber: '4567891230' }
+// ];
 
 // Function to display users in the table
-function displayUsers() {
-  const tableBody = document.querySelector('#userTable tbody');
-  tableBody.innerHTML = '';
+// function displayUsers() {
+//   const tableBody = document.querySelector('#userTable tbody');
+//   tableBody.innerHTML = '';
 
-  console.log(rows)
-  for (let row of users) {
-    const r = document.createElement('tr');
-    console.log(row)
-    row.innerHTML = `
-      <td>${row.name}</td>
-      <td>${row.number}</td>
-      <td>
-        <button class="edit-btn" onclick="editUser('${row.name}')">Edit</button>
-        <button class="delete-btn" onclick="deleteUser('${row.name}')">Delete</button>
-      </td>
-    `;
-    tableBody.appendChild(r);
-  }
-}
+//   console.log(rows)
+//   for (let row of users) {
+//     const r = document.createElement('tr');
+//     console.log(row)
+//     row.innerHTML = `
+//       <td>${row.name}</td>
+//       <td>${row.number}</td>
+//       <td>
+//         <button class="edit-btn" onclick="editUser('${row.name}')">Edit</button>
+//         <button class="delete-btn" onclick="deleteUser('${row.name}')">Delete</button>
+//       </td>
+//     `;
+//     tableBody.appendChild(r);
+//   }
+// }
 
 // Function to add a new user
 function addUser(event) {
@@ -47,10 +47,10 @@ function addUser(event) {
     headers: {
       "Content-type": "application/json; charset=UTF-8"
     }
-  });
+  })
   form.reset();
   hideAddUserForm();
-  displayUsers();
+  // displayUsers();
 }
 
 // Function to show the "Add User" form
@@ -67,14 +67,16 @@ function hideAddUserForm() {
 
 // Function to search for users
 function searchUsers() {
+  // console.log('searchUser')
   const searchInput = document.querySelector('#searchInput');
   const searchTerm = searchInput.value.toLowerCase();
   var tr = document.getElementsByTagName('tr')
   // console.log(tr[1].getElementsByTagName('td')[0].innerHTML.toLowerCase())
   for (i = 1; i < tr.length; i++) {
     const check_name = tr[i].getElementsByTagName('td')[0].innerHTML.toLowerCase().includes(searchTerm)
-    const check_phone = tr[i].getElementsByTagName('td')[1].innerHTML.includes(searchTerm)
-    if (check_name || check_phone)
+    const check_owner = tr[i].getElementsByTagName('td')[1].innerHTML.toLowerCase().includes(searchTerm)
+    const check_phone = tr[i].getElementsByTagName('td')[2].innerHTML.includes(searchTerm)
+    if (check_name || check_phone || check_owner)
       tr[i].style.display = ""
     else tr[i].style.display = "none"
   }
@@ -107,7 +109,7 @@ function editUser(name) {
           "Content-type": "application/json; charset=UTF-8"
         }
       });
-      displayUsers();
+      // displayUsers();
     }
   }
 }
@@ -130,7 +132,7 @@ function deleteUser(id, el) {
 }
 
 // Initial display of users
-displayUsers();
+// displayUsers();
 
 // Event listeners
 document.querySelector('#addUserForm').addEventListener('submit', addUser);
