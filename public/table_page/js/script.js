@@ -111,12 +111,10 @@ function editUser(name) {
     }
   }
 }
-
 // Function to delete a user
-function deleteUser(id) {
+function deleteUser(id, el) {
   console.log(id)
   const confirmed = confirm('Are you sure you want to delete this user?');
-
   if (confirmed) {
     fetch("/deleteUser", {
       method: "POST",
@@ -127,6 +125,7 @@ function deleteUser(id) {
         "Content-type": "application/json; charset=UTF-8"
       }
     });
+    el.parentElement.parentElement.remove()
   }
 }
 

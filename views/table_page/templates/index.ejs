@@ -31,7 +31,7 @@
             <td style="text-align: center;">
               <% if(data[i].owner == user) { %>
               <button class="edit-btn" onclick="editUser(<%= data[i].id %>)">Edit</button>
-              <button class="delete-btn" onclick="deleteUser(<%= data[i].id %>)">Delete</button>
+              <button class="delete-btn" onclick="deleteUser(<%= data[i].id %>, this)">Delete</button>
               <% } %>
             </td>
           </tr>
