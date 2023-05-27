@@ -10,17 +10,19 @@ function displayUsers() {
   const tableBody = document.querySelector('#userTable tbody');
   tableBody.innerHTML = '';
 
-  for (let user of users) {
-    const row = document.createElement('tr');
+  console.log(rows)
+  for (let row of users) {
+    const r = document.createElement('tr');
+    console.log(row)
     row.innerHTML = `
-      <td>${user.name}</td>
-      <td>${user.phoneNumber}</td>
+      <td>${row.name}</td>
+      <td>${row.number}</td>
       <td>
-        <button class="edit-btn" onclick="editUser('${user.name}')">Edit</button>
-        <button class="delete-btn" onclick="deleteUser('${user.name}')">Delete</button>
+        <button class="edit-btn" onclick="editUser('${row.name}')">Edit</button>
+        <button class="delete-btn" onclick="deleteUser('${row.name}')">Delete</button>
       </td>
     `;
-    tableBody.appendChild(row);
+    tableBody.appendChild(r);
   }
 }
 
@@ -111,21 +113,20 @@ function editUser(name) {
 }
 
 // Function to delete a user
-function deleteUser(name) {
+function deleteUser(id) {
+  console.log(id)
   const confirmed = confirm('Are you sure you want to delete this user?');
 
   if (confirmed) {
-    users = users.filter(user => user.name !== name);
     fetch("/deleteUser", {
       method: "POST",
       body: JSON.stringify({
-        name: name,
+        id: id,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
     });
-    displayUsers();
   }
 }
 
