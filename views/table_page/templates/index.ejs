@@ -29,14 +29,19 @@
             <td><%= data[i].owner %></td>
             <td><%= data[i].number %></td>
             <td>
-              <button class="edit-btn" onclick="editUser('<%= data[i].id %>')">Edit</button>
+              <% if(data[i].owner == user) { %>
+              <button class="edit-btn" onclick="editUser(<%= data[i].id %>)">Edit</button>
               <button class="delete-btn" onclick="deleteUser(<%= data[i].id %>)">Delete</button>
+              <% } %>
             </td>
           </tr>
         <% } %>
       </tbody>
     </table>
   </div>
+  <% if(data.length == 0) { %>
+    <p style="margin: auto;text-align: center;"> No data</p>
+  <% } %>
 
   <div id="addUserModal" class="modal">
     <div class="modal-content">
