@@ -36,6 +36,6 @@ router.post('/deleteUser', (req, res)=> {
         if (err) return console.log(err.message)
     })
     console.log("This run!")
-    res.redirect('/')
+    return res.redirect(req.get('referer'));
 })
 module.exports = router
