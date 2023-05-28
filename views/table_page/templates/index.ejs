@@ -29,7 +29,7 @@
             <td style="text-align: center;"><%= data[i].number %></td>
             <td style="text-align: center;">
               <% if(data[i].owner == user) { %>
-              <button class="edit-btn" onclick="editUser(<%= data[i].id %>)">Edit</button>
+              <button class="edit-btn" onclick="editUser(<%= data[i].id %>, this)">Edit</button>
               <button class="delete-btn" onclick="deleteUser(<%= data[i].id %>, this)">Delete</button>
               <% } %>
             <td><input type="checkbox"></td> <!-- เพิ่ม checkbox -->

@@ -27,31 +27,31 @@
 // }
 
 // Function to add a new user
-function addUser(event) {
-  event.preventDefault();
+// function addUser(event) {
+//   event.preventDefault();
 
-  const form = document.querySelector('#addUserForm');
-  const nameInput = document.querySelector('#name');
-  const phoneNumberInput = document.querySelector('#phoneNumber');
+//   const form = document.querySelector('#addUserForm');
+//   const nameInput = document.querySelector('#name');
+//   const phoneNumberInput = document.querySelector('#phoneNumber');
 
-  const name = nameInput.value;
-  const phoneNumber = phoneNumberInput.value;
+//   const name = nameInput.value;
+//   const phoneNumber = phoneNumberInput.value;
 
-  users.push({ name, phoneNumber });
-  fetch("/addUser", {
-    method: "POST",
-    body: JSON.stringify({
-      name: name,
-      phoneNumber: phoneNumber,
-    }),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8"
-    }
-  })
-  form.reset();
-  hideAddUserForm();
-  // displayUsers();
-}
+//   users.push({ name, phoneNumber });
+//   fetch("/addUser", {
+//     method: "POST",
+//     body: JSON.stringify({
+//       name: name,
+//       phoneNumber: phoneNumber,
+//     }),
+//     headers: {
+//       "Content-type": "application/json; charset=UTF-8"
+//     }
+//   })
+//   form.reset();
+//   hideAddUserForm();
+//   // displayUsers();
+// }
 
 // Function to show the "Add User" form
 function showAddUserForm() {
@@ -89,29 +89,27 @@ function searchUsers() {
 }
 
 // Function to edit a user
-function editUser(name) {
-  const user = users.find(user => user.name === name);
-
-  if (user) {
-    const newName = prompt('Enter new name:', user.name);
-    const newPhoneNumber = prompt('Enter new phone number:', user.phoneNumber);
-
+function editUser(id, el) {
+  const row = el.parentElement.parentElement
+    const newName = prompt('Enter new name:', row.children[0].innerHTML);
+    const newPhoneNumber = prompt('Enter new phone number:', row.children[2].innerHTML);
     if (newName && newPhoneNumber) {
-      user.name = newName;
-      user.phoneNumber = newPhoneNumber;
       fetch("/editUser", {
         method: "POST",
         body: JSON.stringify({
+          id:id,
           name: newName,
           phoneNumber: newPhoneNumber,
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8"
         }
-      });
-      // displayUsers();
+      }).then(response=>response.json()).then((data)=>{
+        console.log(data)
+        row.children[0].innerHTML = data.name;
+        row.children[2].innerHTML = data.phone;
+      })
     }
-  }
 }
 // Function to delete a user
 function deleteUser(id, el) {
@@ -135,5 +133,6 @@ function deleteUser(id, el) {
 // displayUsers();
 
 // Event listeners
-document.querySelector('#addUserForm').addEventListener('submit', addUser);
+// document.querySelector('#addUserForm').addEventListener('submit', addUser);
 document.querySelector('#searchInput').addEventListener('input', searchUsers);
+// document.getElementById('addUserForm').preventDefault()
