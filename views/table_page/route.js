@@ -6,8 +6,8 @@ let sql
 
 router.get('/table', (req, res) => {
     if (req.session.login) {
-        sql = `SELECT id, name, owner, number FROM phone_book`
-        db.all(sql, [], (err, rows) => {
+        sql = `SELECT * FROM phone_book WHERE is_private = false or owner = (?)`
+        db.all(sql, [req.session.username], (err, rows) => {
             if (err) return console.log(err.message)
             res.render('./table_page/templates/index.ejs', { data: rows, user: req.session.username})
         })
@@ -46,5 +46,14 @@ router.post('/deleteUser', (req, res)=> {
     })
     // console.log("This run!")
     return res.redirect(req.get('referer'));
+})
+router.post('/is_private', (req, res) => {
+    const id = req.body.id
+    const is_private = req.body.is_private
+    sql = `UPDATE phone_book SET is_private = (?) WHERE id = (?)`
+    db.run(sql, [is_private, id], (err) => {
+        if (err) return console.log(err.message)
+    })
+    res.json({id: id, is_private:is_private})
 })
 module.exports = router

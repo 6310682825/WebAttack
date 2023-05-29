@@ -128,7 +128,20 @@ function deleteUser(id, el) {
     el.parentElement.parentElement.remove()
   }
 }
-
+function is_private(id, el) {
+  fetch("/is_private", {
+    method: "POST",
+    body: JSON.stringify({
+      id: id,
+      is_private: el.checked ? 1:0
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+  }).then((res)=>res.json()).then((data)=>{
+    el.checked = data.is_private === 1 ? true : false 
+  })
+}
 // Initial display of users
 // displayUsers();
 
