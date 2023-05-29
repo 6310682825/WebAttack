@@ -21,7 +21,10 @@ router.post('/addUser', (req, res) => {
     const name = req.body.name
     const phone = req.body.phoneNumber
     sql = "INSERT INTO phone_book (name, owner, number) VALUES (?,?,?)"
-    console.log(name, phone)
+    // console.log(name, phone)
+    db.run(sql, [name, req.session.username, phone], (err) => {
+        if (err) return console.log(err.message)
+    })
     res.redirect('/table')
 })
 router.post('/editUser', (req,res)=> {
@@ -29,7 +32,10 @@ router.post('/editUser', (req,res)=> {
     const name = req.body.name
     const phone = req.body.phoneNumber
     sql = "UPDATE phone_book SET name = ?, number = ? WHERE id = ?"
-    console.log(id,name, phone)
+    // console.log(id,name, phone)
+    db.run(sql, [name, phone, id], (err) => {
+        if (err) return console.log(err.message)
+    })
     res.json({name:name, phone:phone})
 })
 router.post('/deleteUser', (req, res)=> {
@@ -38,7 +44,7 @@ router.post('/deleteUser', (req, res)=> {
     db.run(sql, [id], (err) => {
         if (err) return console.log(err.message)
     })
-    console.log("This run!")
+    // console.log("This run!")
     return res.redirect(req.get('referer'));
 })
 module.exports = router
