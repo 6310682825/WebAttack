@@ -5,11 +5,11 @@ const db = require('../../table.js')
 let sql
 
 router.get('/table', (req, res) => {
-    if (req.session.login) {
+    if (req.cookies.login) {
         sql = `SELECT * FROM phone_book WHERE is_private = false or owner = (?)`
-        db.all(sql, [req.session.username], (err, rows) => {
+        db.all(sql, [req.cookies.username], (err, rows) => {
             if (err) return console.log(err.message)
-            res.render('./table_page/templates/index.ejs', { data: rows, user: req.session.username})
+            res.render('./table_page/templates/index.ejs', { data: rows, user: req.cookies.username})
         })
         //res.sendFile(path.join(__dirname, '/templates/index.html'))
     }
@@ -23,7 +23,7 @@ router.post('/addUser', (req, res) => {
     const private = req.body.private ? 1:0
     sql = "INSERT INTO phone_book (name, owner, number, is_private) VALUES (?,?,?,?)"
     console.log(name, phone, private)
-    db.run(sql, [name, req.session.username, phone, private], (err) => {
+    db.run(sql, [name, req.cookies.username, phone, private], (err) => {
         if (err) return console.log(err.message)
     })
     res.redirect('/table')

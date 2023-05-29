@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     res.redirect('/table')
 })
 router.get('/login', (req, res) => {
-    if (req.session.login) {
+    if (req.cookies.login) {
         res.redirect('/table')
     }
     else {
@@ -24,10 +24,9 @@ router.post('/login', (req, res) => {
     db.all(sql,[],(err,rows)=>{
         if (err) return res.redirect('/login')
         if (rows.length == 0) return res.redirect('/login')
-        req.session.username = username
-        req.session.password = password
-        req.session.login = true
-        req.session.cookie.maxAge = expire
+        res.cookie('username', username, {maxAge:expire})
+        res.cookie('password', password, {maxAge:expire})
+        res.cookie('login', true, {maxAge:expire})
         res.redirect('/')
     })
     /*
