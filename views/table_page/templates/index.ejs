@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>User Management</title>
   <link rel="stylesheet" type="text/css" href="table_page/css/style.css">
 </head>
+
 <body>
   <div class="container">
     <h1>User Management</h1>
@@ -25,40 +27,47 @@
         <!-- User data will be dynamically inserted here -->
         <% for(var i=0; i < data.length; i++) { %>
           <tr>
-            <td><%= data[i].name %></td>
-            <td style="text-align: center;"><%= data[i].owner %></td>
-            <td style="text-align: center;"><%= data[i].number %></td>
+            <td>
+              <%= data[i].name %>
+            </td>
             <td style="text-align: center;">
-              <% if(data[i].owner == user) { %>
-              <button class="edit-btn" onclick="editUser(<%= data[i].id %>, this)">Edit</button>
-              <button class="delete-btn" onclick="deleteUser(<%= data[i].id %>, this)">Delete</button>
-              <% } %>
-            
-          </td>
+              <%= data[i].owner %>
+            </td>
+            <td style="text-align: center;">
+              <%= data[i].number %>
+            </td>
+            <td style="text-align: center;">
+              <% if(data[i].owner==user) { %>
+                <button class="edit-btn" onclick="editUser(<%= data[i].id %>, this)">Edit</button>
+                <button class="delete-btn" onclick="deleteUser(<%= data[i].id %>, this)">Delete</button>
+                <% } %>
+
+            </td>
           </tr>
-        <% } %>
+          <% } %>
       </tbody>
     </table>
   </div>
-  <% if(data.length == 0) { %>
+  <% if(data.length==0) { %>
     <p style="margin: auto;text-align: center;"> No data</p>
-  <% } %>
+    <% } %>
 
-  <div id="addUserModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="hideAddUserForm()">&times;</span>
-      <h2>Add User</h2>
-      <form action="/addUser" method="post" id="addUserForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="phoneNumber">Phone Number:</label>
-        <input type="text" id="phoneNumber" name="phoneNumber" required>
-        <td style="text-align: center;"><% if (data[i].owner === user) {%><input type="checkbox" <%= data[i].is_private === 1 ? 'checked' : '' %> onchange="is_private(<%= data[i].id %>, this)"><% } %></td> <!-- เพิ่ม checkbox -->
-        <button type="submit">Add</button>
-      </form>
-    </div>
-  </div>
-  <script src="table_page/js/script.js"></script>
+      <div id="addUserModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="hideAddUserForm()">&times;</span>
+          <h2>Add User</h2>
+          <form action="/addUser" method="post" id="addUserForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" required>
+            <label for="private"><input type="checkbox" name="private" style="width: fit-content;">Private</label>
+            <button type="submit">Add</button>
+          </form>
+        </div>
+      </div>
+      <script src="table_page/js/script.js"></script>
 
 </body>
+
 </html>

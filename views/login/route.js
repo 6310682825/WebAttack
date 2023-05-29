@@ -30,18 +30,5 @@ router.post('/login', (req, res) => {
         req.session.cookie.maxAge = expire
         res.redirect('/')
     })
-    /*
-    if (username === "Chain13" && password === "IncludedHuman") {
-        req.session.username = username
-        req.session.password = password
-        req.session.login = true
-        req.session.cookie.maxAge = expire
-        res.redirect('/')
-    }
-    else {
-        res.redirect('/login')
-    }
-    */
-
 })
 module.exports = router

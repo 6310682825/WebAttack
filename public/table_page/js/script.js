@@ -1,58 +1,3 @@
-// Sample user data
-// let users = [
-//   { name: 'John Doe', phoneNumber: '1234567890' },
-//   { name: 'Jane Smith', phoneNumber: '9876543210' },
-//   { name: 'Tom Wilson', phoneNumber: '4567891230' }
-// ];
-
-// Function to display users in the table
-// function displayUsers() {
-//   const tableBody = document.querySelector('#userTable tbody');
-//   tableBody.innerHTML = '';
-
-//   console.log(rows)
-//   for (let row of users) {
-//     const r = document.createElement('tr');
-//     console.log(row)
-//     row.innerHTML = `
-//       <td>${row.name}</td>
-//       <td>${row.number}</td>
-//       <td>
-//         <button class="edit-btn" onclick="editUser('${row.name}')">Edit</button>
-//         <button class="delete-btn" onclick="deleteUser('${row.name}')">Delete</button>
-//       </td>
-//     `;
-//     tableBody.appendChild(r);
-//   }
-// }
-
-// Function to add a new user
-// function addUser(event) {
-//   event.preventDefault();
-
-//   const form = document.querySelector('#addUserForm');
-//   const nameInput = document.querySelector('#name');
-//   const phoneNumberInput = document.querySelector('#phoneNumber');
-
-//   const name = nameInput.value;
-//   const phoneNumber = phoneNumberInput.value;
-
-//   users.push({ name, phoneNumber });
-//   fetch("/addUser", {
-//     method: "POST",
-//     body: JSON.stringify({
-//       name: name,
-//       phoneNumber: phoneNumber,
-//     }),
-//     headers: {
-//       "Content-type": "application/json; charset=UTF-8"
-//     }
-//   })
-//   form.reset();
-//   hideAddUserForm();
-//   // displayUsers();
-// }
-
 // Function to show the "Add User" form
 function showAddUserForm() {
   const modal = document.querySelector('#addUserModal');
@@ -80,12 +25,6 @@ function searchUsers() {
       tr[i].style.display = ""
     else tr[i].style.display = "none"
   }
-  // const filteredUsers = users.filter(user =>
-  //   user.name.toLowerCase().includes(searchTerm) ||
-  //   user.phoneNumber.includes(searchTerm)
-  // );
-
-  // displayUsers(filteredUsers);
 }
 
 // Function to edit a user
@@ -128,24 +67,7 @@ function deleteUser(id, el) {
     el.parentElement.parentElement.remove()
   }
 }
-function is_private(id, el) {
-  fetch("/is_private", {
-    method: "POST",
-    body: JSON.stringify({
-      id: id,
-      is_private: el.checked ? 1:0
-    }),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8"
-    }
-  }).then((res)=>res.json()).then((data)=>{
-    el.checked = data.is_private === 1 ? true : false 
-  })
-}
-// Initial display of users
-// displayUsers();
+
 
 // Event listeners
-// document.querySelector('#addUserForm').addEventListener('submit', addUser);
 document.querySelector('#searchInput').addEventListener('input', searchUsers);
-// document.getElementById('addUserForm').preventDefault()
