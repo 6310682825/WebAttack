@@ -34,8 +34,6 @@
               <button class="edit-btn" onclick="editUser(<%= data[i].id %>, this)">Edit</button>
               <button class="delete-btn" onclick="deleteUser(<%= data[i].id %>, this)">Delete</button>
               <% } %>
-              
-            <td style="text-align: center;"><% if (data[i].owner === user) {%><input type="checkbox" <%= data[i].is_private === 1 ? 'checked' : '' %> onchange="is_private(<%= data[i].id %>, this)"><% } %></td> <!-- เพิ่ม checkbox -->
             
           </td>
           </tr>
@@ -56,6 +54,7 @@
         <input type="text" id="name" name="name" required>
         <label for="phoneNumber">Phone Number:</label>
         <input type="text" id="phoneNumber" name="phoneNumber" required>
+        <td style="text-align: center;"><% if (data[i].owner === user) {%><input type="checkbox" <%= data[i].is_private === 1 ? 'checked' : '' %> onchange="is_private(<%= data[i].id %>, this)"><% } %></td> <!-- เพิ่ม checkbox -->
         <button type="submit">Add</button>
       </form>
     </div>
