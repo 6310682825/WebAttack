@@ -28,13 +28,13 @@
         <% for(var i=0; i < data.length; i++) { %>
           <tr>
             <td>
-              <%= data[i].name %>
+              <%- data[i].name %>
             </td>
             <td style="text-align: center;">
-              <%= data[i].owner %>
+              <%- data[i].owner %>
             </td>
             <td style="text-align: center;">
-              <%= data[i].number %>
+              <%- data[i].number %>
             </td>
             <td style="text-align: center;">
               <% if(data[i].owner==user) { %>
